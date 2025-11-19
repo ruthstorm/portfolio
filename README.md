@@ -1,7 +1,7 @@
-Portfolio — Front-End Repository Overview
+Portfolio of Ruth Storm
 =========================================
 
-This repository contains a responsive static portfolio website built with semantic HTML, Sass-based styles, and a small set of vanilla JavaScript utilities. It’s optimized for visual presentation (photography-heavy pages), simple hosting on static platforms (GitHub Pages, Netlify, Vercel), and progressive enhancement. 
+A visually immersive portfolio website showcasing my projects through elegant, responsive layouts and smooth interactions. Built with semantic HTML, Sass, and JavaScript, the site prioritizes user experience with fast loading, intuitive navigation, and seamless presentation across all devices.
 
 
 Repository Structure
@@ -23,9 +23,4 @@ Design & Implementation Notes
 - JS utilities
   - Minimal dependency set: jQuery is used for DOM utilities and several plugins (breakpoints, scrolly/scrollex) for scroll-driven effects.
 
-Developer Experience
---------------------
-- Local server: use `python3 -m http.server` or a lightweight Node static server.
-- To rebuild Sass locally:
-  - Either use the included `sass` (Dart Sass) command or add a `package.json` with convenience scripts.
 
