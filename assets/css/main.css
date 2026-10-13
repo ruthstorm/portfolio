@@ -3034,6 +3034,11 @@ input, select, textarea {
 				width: 100%;
 			}
 
+			.spotlights > section > .image.depowl-image {
+				background-color: bisque;
+				transition: background-color 1s ease;
+			}
+
 		.spotlights > section > .content {
 			padding: 4em 5em 2em 5em ;
 			display: -moz-flex;
