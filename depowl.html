@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html>
 	<head>
-		<title>Ruth Storm - Birds</title>
+		<title>Ruth Storm - DepOwl</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="icon" type="image/png" href="favicon_inuksuk.png">
@@ -28,30 +28,37 @@
 						<div class="inner">
 							<h1 class="major">DepOwl</h1>
 							<span class="image fit"><img src="images/depowl_logo.png" alt="DepOwl logo" /></span>
-							<h2>How I Came to Birding</h2>
-							<p>In 2020, like many people, I began working from home full time for the first time. Our team had experimented with remote work for years—every Wednesday was a “work from home” day dedicated to uninterrupted coding with no meetings. When the pandemic arrived, that one day became every day.</p>
+							<h2>The reporter&rsquo;s job</h2>
+							<p>A court reporter uses DepOwl Legal at app.depowl.legal to hand off a transcript PDF and get an errata sheet back. This draft follows that one job. Admin work stays off-stage, except where delivery changes the reporter’s list or inbox.</p>
+							<p>I designed and built <a href="https://app.depowl.legal/" target="_blank" rel="noopener noreferrer">DepOwl Legal</a> so court reporters and their staff can send a deposition transcript out for proof review and get an errata sheet back without chasing status or a separate invoice. This page describes that shipped flow. It does not report usage numbers.</p>
 
-							<p><span class="image right"><img src="images/bird_window_view.jpg" alt="Home office with a window view" /></span>My “home office” wasn't really an office at all. It was a desk tucked into the corner of the living room beside a window overlooking the neighboring yard. Just outside was a dense bush, a bamboo grove, a cherry tree, and towering over everything, a magnificent oak tree.</p>
-							
-							<p>Before long, I started noticing a tiny bird with a little mohawk landing in the bush only a few meters from my desk. Soon I realized it wasn't alone. Chickadees, finches, hummingbirds, and other small birds seemed to treat that corner of the yard like a busy neighborhood.</p>
-							
-							<p>One detail constantly caught my eye: a small piece of crumpled tin foil lodged in the bush. It sat about seven feet off the ground on the other side of a wire fence, just far enough away that removing it wasn't practical. It became part of the scenery.</p>
+							<h2>Where errata fits</h2>
+							<p>A court reporter produces the official transcript of a deposition. Proof review checks that transcript and returns an errata sheet: the corrections. The people around that work are not all reporters. Sign-up asks which role the account is for — court reporter, scopist or proofreader, law firm staff, agency, stenography school, or other — and a reporter can add a CSR number. Terms of service are accepted then, so checkout later is only about the job.</p>
+							<p>The handoff is the hard part. Someone uploads a PDF, someone else proofs it, and the owner of the job needs to know what it will cost and when the sheet is ready. DepOwl keeps that in one job instead of an email thread plus a bill.</p>
 
-							<p><span class="image left"><img src="images/bird_nest.jpg" alt="A piece of tinfoil in a bird nest" /></span>Then, in the spring of 2021, something unexpected happened. The tiniest of the birds began weaving twigs around that piece of tin foil. Day after day, whenever I happened to glance away from my screen, I could watch another small piece of the nest appear. What had been an annoying bit of litter slowly became the foundation of a home.</p>
+							<h2>Submit the transcript, not the status</h2>
+							<p>A new account lands on its own jobs, with a short welcome that points at creating the first job and at Help in the sidebar. Help sends a message from the signed-in account, so the person does not have to reintroduce themselves.</p>
+							<p>Creating a job asks for two things: a transcript name and a PDF, up to 25 MB. The person submitting does not type a status or a ready date. Those belong to the workflow after the file is in. The list shows only jobs that account owns.</p>
 
-							<p>That little bush became my favorite distraction between meetings and coding sessions. Looking outside for a minute to see what the birds were doing became a surprisingly good way to reset my brain before diving back into work.</p>
+							<h2>Count the pages before anyone pays</h2>
+							<p>The server counts the pages. Until that finishes, the row says “Counting…”. If the count fails, the reporter can retry it. The price stays blank until there is a page count, because the estimate is pages times a rate, not a number someone has to guess from the filename.</p>
 
-							<p>About a year later, travel restrictions eased and my Canadian passport was released from a year-long backlog, allowing me to visit my family again. When I mentioned my newfound interest in birds, my dad introduced me to <a href="https://merlin.allaboutbirds.org/" target="_blank" rel="noopener noreferrer">Merlin</a>, the free bird identification app from the <a href="https://www.birds.cornell.edu/home/" target="_blank" rel="noopener noreferrer">Cornell Lab of Ornithology</a>.</p>
+							<h2>Show the price, then hold the card</h2>
+							<p>“Proof this job” opens the delivery choice only after the count is in. Each tier shows its turnaround, its per-page rate, its page cap, and an estimate for this transcript:</p>
+							<ul>
+								<li>Standard — 2 business days, $0.29 per page, up to 900 pages</li>
+								<li>Expedite — next business day, $0.49 per page, up to 600 pages</li>
+								<li>Daily — by 7 AM, $0.79 per page, up to 300 pages</li>
+							</ul>
+							<p>A tier over its cap cannot be selected. Billing uses a 25-page minimum, and the dialog says so before checkout. Stripe places an authorization hold. The card is charged when the errata sheet is delivered, not when the transcript is uploaded. If checkout was started and left unfinished, the same job offers “Resume payment” instead of a second, conflicting charge.</p>
 
-							<p><span class="image right"><img src="images/merlin_in_hand.jpg" alt="The Merlin app in a hand" /></span>Merlin completely changed the way I experienced the outdoors. Suddenly the songs I heard on walks had names, photos, and fascinating stories attached to them. Every walk became a little treasure hunt. There's something wonderfully grounding about stopping to listen for birds for a few minutes—it feels like a different kind of “touch grass” moment. And birds are amazing. After all, they're living dinosaurs.</p>
+							<h2>A status you can name</h2>
+							<p>Each job is Uploaded, Processing, or Ready for Download. The icon carries that label, so the table does not depend on color alone. Processing jobs show an estimated ready date taken from the tier that was chosen. “Download Errata” appears only when the sheet is actually ready.</p>
 
-							<p>As a software engineer, I was excited to discover that Cornell also provides the <a href="https://science.ebird.org/en/use-ebird-data/download-ebird-data-products" target="_blank" rel="noopener noreferrer">eBird API</a>. The API gives developers access to one of the world's largest biodiversity datasets, built from millions of bird observations submitted by birders across the globe.</p>
+							<h2>The other side of the handoff</h2>
+							<p>Reporters do not see the operations tools. An admin sees every job, an audit log, and a way to create an account. Uploading the errata PDF is what finishes the job: the hold is captured, the owner is emailed, and the sheet becomes available to download. Payment and delivery stay the same event.</p>
 
-							<p><a href="https://ruthstorm.github.io/birds/" target="_blank" rel="noopener noreferrer">This project</a> was my opportunity to bring together two interests I never expected to overlap: building software and learning about birds. I hope it helps you discover some fascinating neighbors living just outside your own window.</p>
-
-							<a href="index.html" class="button"><i class="fa fa-arrow-left"></i> Back</a>&nbsp; &nbsp;
-							<!-- A story about my love for birding -->
-							<a href="https://ruthstorm.github.io/birds/" class="button">Birds Near You</a>
+							<a href="index.html" class="button"><i class="fa fa-arrow-left"></i> Back</a>
 						</div>
 					</section>
 
