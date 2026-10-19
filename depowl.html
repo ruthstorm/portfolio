@@ -27,53 +27,73 @@
 					<section id="main" class="wrapper">
 						<div class="inner">
 							<h1 class="major">DepOwl</h1>
-							<span class="image fit"><img src="images/depowl_intro.png" alt="DepOwl logo" /></span>
-							<p>DepOwl is a deposition transcript verification service built for the precision and structure of the legal record. I designed and built the reporter-facing experience that takes a transcript from upload through verification to a clear, review-ready errata report.</p>
+							<span class="image fit"><img src="images/IntroImage02.png" alt="DepOwl Jobs page with a welcome banner and an empty job row" /></span>
+							<p>I built the DepOwl MVP independently in seven months, with AI assistance for architecture. It takes a court reporter from sign-up to the errata sheet they download.</p>
 
 							<div class="table-wrapper">
 								<table>
 									<tbody>
 										<tr><th>Product</th><td><a href="https://app.depowl.legal/" target="_blank" rel="noopener noreferrer">DepOwl Legal</a> (web app)</td></tr>
-										<tr><th>My role</th><td>Product design and development</td></tr>
-										<tr><th>Primary users</th><td>Court reporters and the professionals who support transcript review</td></tr>
-										<tr><th>Focus</th><td>Submission, progress visibility, delivery selection, and report handoff</td></tr>
+										<tr><th>My role</th><td>Staff Software Engineer and independent product developer</td></tr>
+										<tr><th>Timeline</th><td>Seven months to an MVP</td></tr>
+										<tr><th>Team</th><td>Two-person product; I wrote all of the code</td></tr>
+										<tr><th>Primary users</th><td>Court reporters and their staff</td></tr>
 									</tbody>
 								</table>
 							</div>
 
-							<h2><span class="image right"><img src="images/depowl_signin.png" alt="DepOwl sign-in screen" /></span>Product context</h2>
+							<h2>Court reporters and errata</h2>
+							<p>Court reporters produce deposition transcripts. Before a transcript goes to the attorneys, it needs an errata sheet listing the corrections. The record should reflect the reporter&rsquo;s work and build trust. DepOwl notifies the reporter and makes the errata sheet available as soon as it is ready.</p>
+
+							<h2>Problem and constraints</h2>
+							<ul>
+								<li><strong>Security.</strong> The data is legal material, so the security bar is high.</li>
+								<li><strong>Team size.</strong> One coder built the product.</li>
+								<li><strong>Trust in email.</strong> Email has to build trust, because the reporter learns the errata sheet is ready from it.</li>
+							</ul>
+
+							<h2>Product context</h2>
 							<p>A deposition transcript is a structured legal record, not ordinary prose. DepOwl reviews the document across specialized verification layers, including language, transcript structure, legal context, and consistency across the record. Findings are grounded in the transcript and organized with page and line references, original wording, and a proposed correction or review flag. The reporter remains in control of the final decision.</p>
 							<p>The web experience connects that verification work to the reporter&rsquo;s everyday workflow: submit a transcript, choose the required turnaround, follow progress, and receive the errata report.</p>
 
-							<h2>Designing the service experience</h2>
-							<p>The central design task was to make a multi-step service understandable from the reporter&rsquo;s point of view. A single job record brings together the transcript, page count, delivery tier, status, dates, payment, and final file. Each detail appears when it becomes relevant, so the reporter can move forward with clear information at each step.</p>
-
-							<h2>Sign Up</h2>
-							<p><span class="image fit"><img src="images/depowl_signup_flow.png" alt="DepOwl sign-up flow" /></span>The sign-up process is designed to be quick and straightforward, guiding the reporter through role selection, credential setup, and optional organization details before accepting the Terms of Service.</p>
-							<p>Sign-up is organized into three steps: identify your role, set sign-in credentials, then add an optional organization and accept the Terms of Service. Role choices include court reporter, scopist or proofreader, law firm staff, agency, stenography school, and other, reflecting the range of professionals involved in transcript work.</p>
-
 							<h2>The flow</h2>
-							<p>The reporter&rsquo;s journey follows five connected steps, from job creation to errata delivery.</p>
+							<p>The reporter&rsquo;s path has five steps. Admin is a second beat, covered after the flow.</p>
 
-							<h3>1. Welcome</h3>
-							<p>A new account opens to its Jobs list, with a welcome message that points to creating the first job and to Help.</p>
-							<span class="image fit"><img src="images/depowl_welcome.png" alt="DepOwl welcome screen" /></span>
+							<h3>1. Sign up and verify</h3>
+							<p>Sign-up has three steps. The first collects first and last name, customer type (court reporter, scopist or proofreader, law firm staff, agency, stenography school, or other), and an optional CSR number. The second collects email and a password of at least eight characters, including a letter and a special character. The third adds an optional organization and the Terms of Service. A verification prompt follows sign-up.</p>
+							<span class="image fit"><img src="images/depowl_signup_flow.png" alt="DepOwl three-step sign-up" /></span>
+							<p><strong>Decision: minimal sign-up fields.</strong> I kept the form to what an account needs, so a new user can start quickly. The organization is optional.</p>
 
-							<h3>2. Create a job</h3>
-							<p>Create a Job keeps submission focused on the two required inputs: a transcript name and a PDF (up to 25 MB). Status and ready dates are managed by the workflow, not entered by the reporter. After submission, an on-screen confirmation returns the reporter to Jobs, and an email confirms they will be notified when the errata sheet is ready.</p>
-							<span class="image fit"><img src="images/depowl_createajob.png" alt="DepOwl create a job screen" /></span>
+							<h3>2. Jobs list and first run</h3>
+							<p>A new account opens to its Jobs list. A welcome banner says &ldquo;Welcome to DepOwl!&rdquo; and points to Help. Each account sees only its own jobs.</p>
+							<span class="image fit"><img src="images/depowl_welcome.png" alt="DepOwl Jobs page with the welcome banner and no jobs yet" /></span>
 
-							<h3>3. Proof this job</h3>
-							<p>The Jobs list gives each account a focused view of its own transcripts. Status appears as an icon with a text label (Uploaded, Processing, or Ready for Download), keeping the state legible beyond color. Page count moves from &ldquo;Counting&hellip;&rdquo; to a number, or shows an error with a retry option. The list updates while counting is in progress.</p>
-							<span class="image fit"><img src="images/depowl_proofthisjob.png" alt="DepOwl proof this button" /></span>
+							<h3>3. Create a job</h3>
+							<p>The form asks for a transcript name and a PDF of up to 25 MB. After upload, the server counts the pages. The Pages cell reads &ldquo;Counting&hellip;&rdquo; while the count runs. If the count fails, the cell shows Error with a Retry count button.</p>
+							<span class="image fit"><img src="images/depowl_createajob.png" alt="Create a job form with a transcript name and PDF upload" /></span>
+							<span class="image fit"><img src="images/depowl_proofthisjob.png" alt="Jobs list row showing 39 pages and the Proof this job button" /></span>
 
-							<span class="image fit"><img src="images/depowl_chooseatier.png" alt="DepOwl choose delivery tier dialog" /></span>
+							<h3>4. Choose a tier and pay</h3>
+							<p>Once the page count is known, Proof this job opens the &ldquo;Choose delivery tier&rdquo; dialog. Each tier shows its price per page, an estimate for this transcript, and its page cap. A tier the transcript exceeds is marked &ldquo;Over cap&rdquo; and disabled. Continuing opens Stripe Checkout. If checkout is unfinished, the job offers Resume payment.</p>
+							<span class="image fit"><img src="images/depowl_chooseatier.png" alt="Choose delivery tier dialog with three tiers, each showing price per page, estimate, and page cap" /></span>
+							<div class="table-wrapper">
+								<table>
+									<thead>
+										<tr><th>Tier</th><th>Turnaround</th><th>Price per page</th><th>Page cap</th></tr>
+									</thead>
+									<tbody>
+										<tr><td>Standard</td><td>2 business days</td><td>$0.29</td><td>900</td></tr>
+										<tr><td>Expedite</td><td>Next business day</td><td>$0.49</td><td>600</td></tr>
+										<tr><td>Daily</td><td>By 7 AM</td><td>$0.79</td><td>300</td></tr>
+									</tbody>
+								</table>
+							</div>
+							<p>Stripe places an authorization hold for the greater of the page count or 25 pages. The card is charged when the errata sheet is delivered. The dialog states this, and the 25-page minimum, before checkout. When the reporter returns from Stripe, a &ldquo;Authorization started&rdquo; confirmation repeats the timing: the hold shows as Authorized once Stripe confirms, and the card is charged when the errata is delivered.</p>
+							<p><strong>Decision: authorization hold instead of an upfront charge.</strong> The price depends on the page count, so I hold the billable amount and capture it on delivery. I rejected charging up front.</p>
 
-							<h3>4. Commit to proofing</h3>
-							<p>Once the page count is available, and payment is not already authorized or paid, the reporter can choose a delivery tier. The &ldquo;Choose delivery tier&rdquo; dialog presents turnaround, rate, page cap, and an estimate for the transcript. If checkout is left unfinished, the job offers &ldquo;Resume payment,&rdquo; keeping the next action with the original job.</p>
-
-							<h3>5. Wait, then receive</h3>
-							<p>The row follows the job through Uploaded and Processing, with due, estimated-ready, and ready dates shown as they become available. When the errata report is ready, the reporter can download it from the job and receives an email with the PDF attached.</p>
+							<h3>5. Status, then download</h3>
+							<p>Each status shows an icon with a text label (Uploaded, Processing, or Ready for Download), so the state is legible without relying on color. The status moves from Uploaded to Processing to Ready for Download. Admin uploads the errata PDF, which captures the held payment and marks the job ready. The reporter then gets an email with the errata sheet attached and can download it from the job with the Download Errata action.</p>
+							<p><strong>Decision: React Email for email templates.</strong> The templates were HTML strings inside Edge Functions. I moved them to React Email, so they can be composed and previewed. A build step turns them into the Edge Function templates, including the errata-ready email. I rejected keeping the HTML strings.</p>
 
 							<h2>One job, a complete status picture</h2>
 							<p>Each row brings the transcript and its service details together, so the reporter can scan progress and find the next available action.</p>
@@ -96,35 +116,13 @@
 								</table>
 							</div>
 
-							<h2>Key design decisions</h2>
-
-							<h3>Keep submission focused</h3>
-							<p>The create form asks for the transcript and its name. The system supplies status, dates, and page count as the job progresses. This keeps the handoff direct and gives the reporter one reliable place to follow the work.</p>
-
-							<h3>Make the estimate actionable</h3>
-							<p>The server counts the pages before the reporter chooses a tier. While the count is running, the row communicates progress; if it fails, the reporter can retry. The estimate then reflects the page count and selected rate, giving the reporter concrete information before checkout.</p>
-
-							<h3>Make delivery and payment terms clear</h3>
-							<p>The dialog explains the payment timing before checkout: Stripe places an authorization hold, and the card is charged when the errata sheet is delivered. It also explains the 25-page minimum. On return from Stripe, a confirmation toast reiterates the hold and charge timing.</p>
-							<div class="table-wrapper">
-								<table>
-									<thead>
-										<tr><th>Tier</th><th>Turnaround</th><th>Price per page</th><th>Page cap</th></tr>
-									</thead>
-									<tbody>
-										<tr><td>Standard</td><td>2 business days</td><td>$0.29</td><td>900</td></tr>
-										<tr><td>Expedite</td><td>Next business day</td><td>$0.49</td><td>600</td></tr>
-										<tr><td>Daily</td><td>By 7 AM</td><td>$0.79</td><td>300</td></tr>
-									</tbody>
-								</table>
-							</div>
-							<p>When a transcript exceeds a tier&rsquo;s page cap, that option is disabled and labeled &ldquo;Over cap.&rdquo; The reporter can compare the available service levels before proceeding. Displayed amounts come from the pricing catalog; Stripe prices are resolved on the server.</p>
-
-							<h3>Connect delivery to the report</h3>
-							<p>The download action appears when the job is Ready for Download and the errata file is present. Completing delivery updates the job, captures the authorization, and sends the reporter the ready email with the PDF attached. The status, file, and notification all reflect the same completion point.</p>
-
-							<h2>The designed experience</h2>
-							<p>The resulting experience connects DepOwl&rsquo;s transcript verification to a practical reporter workflow: submit a document, understand its progress and delivery options, then receive an organized errata report. The interface keeps the service details visible while leaving review decisions with the reporter.</p>
+							<h2>Admin</h2>
+							<p>The admin side picks up after payment. I built all of the admin views and designed them to be responsive.</p>
+							<ul>
+								<li><strong>All jobs.</strong> Every job, with a Download Errata action.</li>
+								<li><strong>Upload errata.</strong> Uploads the errata PDF (up to 25 MB) for a job. The upload captures the payment and marks the job ready.</li>
+								<li><strong>Audit logs.</strong> The audit log view.</li>
+							</ul>
 
 							<a href="index.html" class="button"><i class="fa fa-arrow-left"></i> Back</a>
 						</div>
@@ -136,7 +134,7 @@
 			<footer id="footer" class="wrapper alt">
 				<div class="inner">
 					<ul class="menu">
-						<li>&copy; Ruth Storm. All rights reserved 2025.</li>
+						<li>&copy; Ruth Storm. All rights reserved 2026.</li>
 					</ul>
 				</div>
 			</footer>
