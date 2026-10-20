@@ -27,8 +27,8 @@
 					<section id="main" class="wrapper">
 						<div class="inner">
 							<h1 class="major">DepOwl</h1>
-							<span class="image fit"><img src="images/IntroImage02.png" alt="DepOwl Jobs page with a welcome banner and an empty job row" /></span>
-							<p>I built the DepOwl MVP independently in seven months, with AI assistance for architecture. It takes a court reporter from sign-up to the errata sheet they download.</p>
+							<span class="image fit"><img src="images/depowl_intro.png" alt="DepOwl Jobs page with a welcome banner and an empty job row" /></span>
+							<p>I built the DepOwl MVP independently in seven months, using AI-augmented development workflows, Cursor, GitHub Copilot, agent-directed implementation, context engineering, AI code review and refinement, test generation, debugging, architecture and design validation, secure production delivery. It takes a court reporter from sign-up through transcript upload, tiered payment, and status tracking to the errata sheet they download.</p>
 
 							<div class="table-wrapper">
 								<table>
@@ -36,7 +36,7 @@
 										<tr><th>Product</th><td><a href="https://app.depowl.legal/" target="_blank" rel="noopener noreferrer">DepOwl Legal</a> (web app)</td></tr>
 										<tr><th>My role</th><td>Staff Software Engineer and independent product developer</td></tr>
 										<tr><th>Timeline</th><td>Seven months to an MVP</td></tr>
-										<tr><th>Team</th><td>Two-person product; I wrote all of the code</td></tr>
+										<tr><th>Team</th><td>Two-person product; I wrote most of the code</td></tr>
 										<tr><th>Primary users</th><td>Court reporters and their staff</td></tr>
 									</tbody>
 								</table>
@@ -49,7 +49,15 @@
 							<ul>
 								<li><strong>Security.</strong> The data is legal material, so the security bar is high.</li>
 								<li><strong>Team size.</strong> One coder built the product.</li>
-								<li><strong>Trust in email.</strong> Email has to build trust, because the reporter learns the errata sheet is ready from it.</li>
+								<li><strong>Trust in email.</strong> Email is the reporter's first signal that the work is done right, so it has to earn their trust.</li>
+							</ul>
+
+							<h2>Working with AI</h2>
+							<p>I used AI tools throughout the build, and I kept the decisions. I set the architecture, directed the AI on each change, and reviewed what it produced before it shipped.</p>
+							<ul>
+								<li><strong>Architecture first.</strong> I decided the system design, data model, and security boundaries before asking AI to build within them.</li>
+								<li><strong>Directed changes.</strong> I scoped each change, reviewed the diff, and checked the result against the flow the reporter sees.</li>
+								<li><strong>Targeted use.</strong> I used GitHub Copilot for code review and refinement, catching issues in flows like sign-up and password recovery, and leaned on agent-directed prototyping and debugging to work through tricky logic before I committed to it.</li>
 							</ul>
 
 							<h2>Product context</h2>
