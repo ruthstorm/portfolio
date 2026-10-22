@@ -64,24 +64,29 @@
 							<p>A deposition transcript is a structured legal record, not ordinary prose. DepOwl reviews the document across specialized verification layers, including language, transcript structure, legal context, and consistency across the record. Findings are grounded in the transcript and organized with page and line references, original wording, and a proposed correction or review flag. The reporter remains in control of the final decision.</p>
 							<p>The web experience connects that verification work to the reporter&rsquo;s everyday workflow: submit a transcript, choose the required turnaround, follow progress, and receive the errata report.</p>
 
-							<h2>The flow</h2>
-							<p>The reporter&rsquo;s path has five steps. Admin is a second beat, covered after the flow.</p>
-
-							<h3>1. Sign up and verify</h3>
+							<h2>Sign up</h2>
 							<p>Sign-up has three steps. The first collects first and last name, customer type (court reporter, scopist or proofreader, law firm staff, agency, stenography school, or other), and an optional CSR number. The second collects email and a password of at least eight characters, including a letter and a special character. The third adds an optional organization and the Terms of Service. A verification prompt follows sign-up.</p>
 							<span class="image fit"><img src="images/depowl_signup_flow.png" alt="DepOwl three-step sign-up" /></span>
 							<p><strong>Decision: minimal sign-up fields.</strong> I kept the form to what an account needs, so a new user can start quickly. The organization is optional.</p>
 
-							<h3>2. Jobs list and first run</h3>
-							<p>A new account opens to its Jobs list. A welcome banner says &ldquo;Welcome to DepOwl!&rdquo; and points to Help. Each account sees only its own jobs.</p>
+							<h2>Verify</h2>
+							<p>After completing the sign-up steps, the user is prompted to verify their email address. This ensures that the account is associated with a valid email before proceeding to use the application.</p>
+							<span class="image fit"><img src="images/depowl_verify.png" alt="DepOwl verification prompt" /></span>
+							<p><strong>Decision: verification prompt.</strong> After sign-up, the user sees a verification prompt to confirm their email address before proceeding.</p>
+
+							<h2>The flow</h2>
+							<p>The reporter&rsquo;s path has five steps. Admin is a second beat, covered after the flow.</p>
+							
+							<h3>1. Jobs list and first run</h3>
+							<p>After entering the verification code sent to their email, a new account opens to its Jobs list. A welcome banner says &ldquo;Welcome to DepOwl!&rdquo; and points to Help. Each account sees only its own jobs.</p>
 							<span class="image fit"><img src="images/depowl_welcome.png" alt="DepOwl Jobs page with the welcome banner and no jobs yet" /></span>
 
-							<h3>3. Create a job</h3>
+							<h3>2. Create a job</h3>
 							<p>The form asks for a transcript name and a PDF of up to 25 MB. After upload, the server counts the pages. The Pages cell reads &ldquo;Counting&hellip;&rdquo; while the count runs. If the count fails, the cell shows Error with a Retry count button.</p>
 							<span class="image fit"><img src="images/depowl_createajob.png" alt="Create a job form with a transcript name and PDF upload" /></span>
 							<span class="image fit"><img src="images/depowl_proofthisjob.png" alt="Jobs list row showing 39 pages and the Proof this job button" /></span>
 
-							<h3>4. Choose a tier and pay</h3>
+							<h3>3. Choose a tier and pay</h3>
 							<p>Once the page count is known, Proof this job opens the &ldquo;Choose delivery tier&rdquo; dialog. Each tier shows its price per page, an estimate for this transcript, and its page cap. A tier the transcript exceeds is marked &ldquo;Over cap&rdquo; and disabled. Continuing opens Stripe Checkout. If checkout is unfinished, the job offers Resume payment.</p>
 							<span class="image fit"><img src="images/depowl_chooseatier.png" alt="Choose delivery tier dialog with three tiers, each showing price per page, estimate, and page cap" /></span>
 							<div class="table-wrapper">
@@ -99,9 +104,12 @@
 							<p>Stripe places an authorization hold for the greater of the page count or 25 pages. The card is charged when the errata sheet is delivered. The dialog states this, and the 25-page minimum, before checkout. When the reporter returns from Stripe, a &ldquo;Authorization started&rdquo; confirmation repeats the timing: the hold shows as Authorized once Stripe confirms, and the card is charged when the errata is delivered.</p>
 							<p><strong>Decision: authorization hold instead of an upfront charge.</strong> The price depends on the page count, so I hold the billable amount and capture it on delivery. I rejected charging up front.</p>
 
-							<h3>5. Status, then download</h3>
+							<h3>4. Status, then download</h3>
 							<p>Each status shows an icon with a text label (Uploaded, Processing, or Ready for Download), so the state is legible without relying on color. The status moves from Uploaded to Processing to Ready for Download. Admin uploads the errata PDF, which captures the held payment and marks the job ready. The reporter then gets an email with the errata sheet attached and can download it from the job with the Download Errata action.</p>
 							<p><strong>Decision: React Email for email templates.</strong> The templates were HTML strings inside Edge Functions. I moved them to React Email, so they can be composed and previewed. A build step turns them into the Edge Function templates, including the errata-ready email. I rejected keeping the HTML strings.</p>
+
+							<h3>5. Errata delivery</h3>
+							<p>The errata sheet is delivered to the reporter via email and is also available for download from the job page. This step finalizes the job, capturing the held payment and marking the job as complete.</p>
 
 							<h2>One job, a complete status picture</h2>
 							<p>Each row brings the transcript and its service details together, so the reporter can scan progress and find the next available action.</p>
