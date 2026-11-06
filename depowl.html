@@ -33,7 +33,7 @@
 							<div class="table-wrapper">
 								<table>
 									<tbody>
-										<tr><th>Product</th><td><a href="https://app.depowl.legal/" target="_blank" rel="noopener noreferrer">DepOwl Legal</a> (web app)</td></tr>
+										<tr><th>Product</th><td><a href="https://depowl.legal/" target="_blank" rel="noopener noreferrer">DepOwl</a></td></tr>
 										<tr><th>My role</th><td>Staff Software Engineer and independent product developer</td></tr>
 										<tr><th>Timeline</th><td>Seven months to an MVP</td></tr>
 										<tr><th>Team</th><td>Two-person product; I wrote most of the code</td></tr>
@@ -73,6 +73,7 @@
 							<p>After completing the sign-up steps, the user is prompted to verify their email address. This ensures that the account is associated with a valid email before proceeding to use the application.</p>
 							<span class="image fit"><img src="images/depowl_verify.png" alt="DepOwl verification prompt" /></span>
 							<p><strong>Decision: verification prompt.</strong> After sign-up, the user sees a verification prompt to confirm their email address before proceeding.</p>
+							<p><strong>Decision: React Email for email templates.</strong> The templates were HTML strings inside Edge Functions. I moved them to React Email, so they can be composed and previewed. A build step turns them into the Edge Function templates, including the errata-ready email. I rejected keeping the HTML strings.</p>
 
 							<h2>The flow</h2>
 							<p>The reporter&rsquo;s path has five steps.</p>
@@ -84,7 +85,7 @@
 							<h3>2. Create a job</h3>
 							<p>The user clicks Create a job to open the form. The job name is then automatically generated based on uploaded transcript file name and displayed in the form. They then choose a transcript name and upload a PDF of up to 25 MB. The PDF is validated for size and format before being accepted.</p>
 							<span class="image fit"><img src="images/depowl_createajob.png" alt="Create a job with a PDF upload" /></span>
-							<p>After uploading the PDF, the server counts the pages while the Pages cell reads &ldquo;Counting&hellip;&rdquo;. If the count fails, the cell shows Error with a Retry count button.</p>
+							<p>After uploading the PDF, the server counts the pages while the Pages cell reads &ldquo;Counting&hellip;&rdquo;. If the count fails, the cell shows Error with a Retry count button. If the count succeeds, the cell displays the number of pages and the Proof this job button becomes available.</p>
 							
 							<span class="image fit"><img src="images/depowl_proofthisjob.png" alt="Jobs list row showing 39 pages and the Proof this job button" /></span>
 
@@ -103,37 +104,18 @@
 									</tbody>
 								</table>
 							</div>
-							<p>Stripe places an authorization hold for the greater of the page count or 25 pages. The card is charged when the errata sheet is delivered. The dialog states this, and the 25-page minimum, before checkout. When the reporter returns from Stripe, a &ldquo;Authorization started&rdquo; confirmation repeats the timing: the hold shows as Authorized once Stripe confirms, and the card is charged when the errata is delivered.</p>
+							<p>Stripe places an authorization hold for the greater of the page count or 25 pages. The card is charged when the errata sheet is available for download and delivered via email.</p>
 							<span class="image fit"><img src="images/depowl_stripe.png" alt="Stripe Checkout page for payment" /></span>
 							<p><strong>Decision: authorization hold instead of an upfront charge.</strong> The price depends on the page count, so I hold the billable amount and capture it on delivery. I rejected charging up front.</p>
 
-							<h3>4. Status, then download</h3>
-							<p>Each status shows an icon with a text label (Uploaded, Processing, or Ready for Download), so the state is legible without relying on color. The status moves from Uploaded to Processing to Ready for Download. Admin uploads the errata PDF, which captures the held payment and marks the job ready. The reporter then gets an email with the errata sheet attached and can download it from the job with the Download Errata action.</p>
-							<p><strong>Decision: React Email for email templates.</strong> The templates were HTML strings inside Edge Functions. I moved them to React Email, so they can be composed and previewed. A build step turns them into the Edge Function templates, including the errata-ready email. I rejected keeping the HTML strings.</p>
+							<h3>4. Status</h3>
+							<p>Each status shows an icon with a text label (Uploaded, Processing, or Ready for Download), so the state is legible without relying on color. The status moves from Uploaded to Processing to Ready for Download. Admin uploads the errata PDF, which captures the held payment and marks the job ready.</p>
+							<span class="image fit"><img src="images/depowl_status.png" alt="Status section showing Uploaded, Processing, and Ready for Download" /></span>
 
 							<h3>5. Errata delivery</h3>
-							<p>The errata sheet is delivered to the reporter via email and is also available for download from the job page. This step finalizes the job, capturing the held payment and marking the job as complete.</p>
-
-							<h2>One job, a complete status picture</h2>
-							<p>Each row brings the transcript and its service details together, so the reporter can scan progress and find the next available action.</p>
-							<div class="table-wrapper">
-								<table>
-									<thead>
-										<tr><th>Column</th><th>What the reporter reads</th></tr>
-									</thead>
-									<tbody>
-										<tr><td>Status</td><td>Uploaded, Processing, or Ready for Download</td></tr>
-										<tr><td>Transcript name</td><td>The name entered on Create a Job</td></tr>
-										<tr><td>Pages</td><td>Counting&hellip;, a number, or Error with Retry count</td></tr>
-										<tr><td>Tier</td><td>Standard, expedite, or daily once chosen; otherwise &mdash;</td></tr>
-										<tr><td>Est. price</td><td>Based on page count and tier. &ldquo;Over cap&rdquo; if the transcript exceeds the tier&rsquo;s cap. &mdash; until both exist.</td></tr>
-										<tr><td>Payment</td><td>Proof this job, Resume payment, Counting&hellip;, or a payment state (Authorized, Paid, Pending, Failed, Refunded, Unpaid)</td></tr>
-										<tr><td>Transcript size</td><td>Size of the uploaded PDF</td></tr>
-										<tr><td>Created, Due, Ready Est., Ready</td><td>Dates. Empty cells stay &mdash; until a date is set.</td></tr>
-										<tr><td>Download Errata</td><td>The download action when the job is ready and a file is present; otherwise &mdash;</td></tr>
-									</tbody>
-								</table>
-							</div>
+							<p>The reporter receives an email with the errata sheet attached and can also download it directly from the job page using the Download Errata action. Delivery triggers capture of the previously authorized payment and automatically marks the job as complete, closing the workflow.</p>
+							<span class="image fit"><img src="images/depowl_download.png" alt="Download Errata action on the job page" /></span>
+							<p><strong>Decision: Email delivery for errata.</strong> The reporter receives the errata sheet by email and can also download it directly from the job page. Delivery automatically triggers payment capture and marks the job as complete.</p>
 
 							<a href="index.html" class="button"><i class="fa fa-arrow-left"></i> Back</a>
 						</div>
