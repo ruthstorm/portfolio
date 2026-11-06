@@ -77,13 +77,15 @@
 							<h2>The flow</h2>
 							<p>The reporter&rsquo;s path has five steps.</p>
 							
-							<h3>1. Jobs list and first run</h3>
-							<p>After entering the verification code sent to their email, a new account opens to its Jobs list. A welcome banner says &ldquo;Welcome to DepOwl!&rdquo; and points to Help. Each account sees only its own jobs.</p>
+							<h3>1. Welcome messaging, Jobs list and first run</h3>
+							<p>After entering the verification code sent to their email, a new account opens to its Jobs list. A welcome banner says &ldquo;Welcome to DepOwl!&rdquo; and points to Help.</p>
 							<span class="image fit"><img src="images/depowl_welcome.png" alt="DepOwl Jobs page with the welcome banner and no jobs yet" /></span>
 
 							<h3>2. Create a job</h3>
-							<p>The form asks for a transcript name and a PDF of up to 25 MB. After upload, the server counts the pages. The Pages cell reads &ldquo;Counting&hellip;&rdquo; while the count runs. If the count fails, the cell shows Error with a Retry count button.</p>
-							<span class="image fit"><img src="images/depowl_createajob.png" alt="Create a job form with a transcript name and PDF upload" /></span>
+							<p>The user clicks Create a job to open the form. The job name is then automatically generated based on uploaded transcript file name and displayed in the form. They then choose a transcript name and upload a PDF of up to 25 MB. The PDF is validated for size and format before being accepted.</p>
+							<span class="image fit"><img src="images/depowl_createajob.png" alt="Create a job with a PDF upload" /></span>
+							<p>After uploading the PDF, the server counts the pages while the Pages cell reads &ldquo;Counting&hellip;&rdquo;. If the count fails, the cell shows Error with a Retry count button.</p>
+							
 							<span class="image fit"><img src="images/depowl_proofthisjob.png" alt="Jobs list row showing 39 pages and the Proof this job button" /></span>
 
 							<h3>3. Choose a tier and pay</h3>
@@ -102,6 +104,7 @@
 								</table>
 							</div>
 							<p>Stripe places an authorization hold for the greater of the page count or 25 pages. The card is charged when the errata sheet is delivered. The dialog states this, and the 25-page minimum, before checkout. When the reporter returns from Stripe, a &ldquo;Authorization started&rdquo; confirmation repeats the timing: the hold shows as Authorized once Stripe confirms, and the card is charged when the errata is delivered.</p>
+							<span class="image fit"><img src="images/depowl_stripe.png" alt="Stripe Checkout page for payment" /></span>
 							<p><strong>Decision: authorization hold instead of an upfront charge.</strong> The price depends on the page count, so I hold the billable amount and capture it on delivery. I rejected charging up front.</p>
 
 							<h3>4. Status, then download</h3>
