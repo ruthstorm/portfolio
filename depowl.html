@@ -43,13 +43,13 @@
 							</div>
 
 							<h2>Court reporters and errata</h2>
-							<p>Court reporters produce deposition transcripts. Before a transcript goes to the attorneys, it needs an errata sheet listing the corrections. The record should reflect the reporter&rsquo;s work and build trust. DepOwl notifies the reporter and makes the errata sheet available as soon as it is ready.</p>
+							<p>Court reporters produce deposition transcripts. Before a transcript is certified and goes to the attorneys, it needs an accurate list of transcription corrections. The record should reflect the reporter&rsquo;s work and build trust. DepOwl notifies the reporter and makes this errata sheet available as soon as it is ready.</p>
 
 							<h2>Problem and constraints</h2>
 							<ul>
 								<li><strong>Security.</strong> The data is legal material, so the security bar is high.</li>
 								<li><strong>Team size.</strong> One coder built the product.</li>
-								<li><strong>Trust in email.</strong> Email is the reporter's first signal that the work is done right, so it has to earn their trust.</li>
+								<li><strong>Trust in email.</strong> Email is the primary method of communication, so it has to earn the reporter's trust.</li>
 							</ul>
 
 							<h2>Working with AI</h2>
@@ -65,7 +65,7 @@
 							<p>The web experience connects that verification work to the reporter&rsquo;s everyday workflow: submit a transcript, choose the required turnaround, follow progress, and receive the errata report.</p>
 
 							<h2>Sign up</h2>
-							<p>Sign-up has three steps. The first collects first and last name, customer type (court reporter, scopist or proofreader, law firm staff, agency, stenography school, or other), and an optional CSR number. The second collects email and a password of at least eight characters, including a letter and a special character. The third adds an optional organization and the Terms of Service. A verification prompt follows sign-up.</p>
+							<p>Sign-up has three steps. The first collects first and last name. The second collects email and a password of at least eight characters, including a letter and a special character. The third adds customer type (court reporter, scopist or proofreader, law firm staff, agency, stenography school, or other), an optional organization, and the Terms of Service. A verification prompt follows sign-up.</p>
 							<span class="image fit"><img src="images/depowl_signup_flow.png" alt="DepOwl three-step sign-up" /></span>
 							<p><strong>Decision: minimal sign-up fields.</strong> I kept the form to what an account needs, so a new user can start quickly. The organization is optional.</p>
 
@@ -115,7 +115,7 @@
 							<h3>5. Errata delivery</h3>
 							<p>The reporter receives an email with the errata sheet attached and can also download it directly from the job page using the Download Errata action. Delivery triggers capture of the previously authorized payment and automatically marks the job as complete, closing the workflow.</p>
 							<span class="image fit"><img src="images/depowl_download.png" alt="Download Errata action on the job page" /></span>
-							<p><strong>Decision: Email delivery for errata.</strong> The reporter receives the errata sheet by email and can also download it directly from the job page. Delivery automatically triggers payment capture and marks the job as complete.</p>
+							<p><strong>Decision: Email delivery for errata.</strong> The reporter receives the errata sheet by email and can also download it directly from the job page in pdf format. Delivery automatically triggers payment capture and marks the job as complete.</p>
 
 							<a href="index.html" class="button"><i class="fa fa-arrow-left"></i> Back</a>
 						</div>
